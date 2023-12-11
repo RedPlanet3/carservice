@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_DB: carservice
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: lena
+    ports:
+      - '5433:5432'
+    volumes:
+      - ./src/main/resources/docker:/docker-entrypoint-initdb.d
+  app:
+    build:
+      context: .
+    container_name: app
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      - SPRING_DATASOURCE_IP=db
+      - SPRING_DATASOURCE_PORT=5432
+      - SPRING_DATASOURCE_USERNAME=lena
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+
+
+#  app:
+#    image: 'deedat95/docker-spring-boot-postgres:latest'
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: app
+#    depends_on:
+#      - postgres
+#    environment:
+#      - SPRING_DATASOURSE_URL=jdbc:postgresql://localhost:5432/shoplist
+#      - SPRING_DATASOURSE_USERNAME=lena
+#      - SPRING_DATASOURSE_PASSWORD=1234

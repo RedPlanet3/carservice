@@ -3,7 +3,6 @@ package ru.pryakhina.car_service.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.pryakhina.car_service.dao.BodyRepository;
 import ru.pryakhina.car_service.dao.CarRepository;
 import ru.pryakhina.car_service.dao.WeelRepository;
@@ -11,7 +10,6 @@ import ru.pryakhina.car_service.entity.Body;
 import ru.pryakhina.car_service.entity.Car;
 import ru.pryakhina.car_service.entity.Weel;
 import ru.pryakhina.car_service.exception_handing.NotFoundException;
-
 import java.util.List;
 import java.util.Optional;
 

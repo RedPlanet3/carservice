@@ -5,33 +5,34 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
- * Класс
+ * Класс корпус
  * @author elena
  */
 @Entity
 @Table(name = "bodies")
 public class Body {
 
-        /** Поле ID продукта */
+        /** Поле ID корпуса */
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
         private Integer id;
 
-        /** Поле имя продукта */
-
+        /** Поле имя корпуса */
         @NotBlank
         @Column(name = "name")
         private String name;
 
-        /** Поле ссылка на роль, к которой относится текущий продукт */
+        /** Поле ссылка на авто, которые используют этот корпус */
         @OneToMany(cascade = CascadeType.ALL, mappedBy = "body")
         private List<Car> cars;
 
+        /** Конструктор корпуса */
         public Body(String name) {
                 this.name = name;
         }
 
+        /** Конструктор корпуса */
         public Body() {
         }
 
@@ -51,11 +52,4 @@ public class Body {
                 this.name = name;
         }
 
-//        public List<Car> getCars() {
-//                return cars;
-//        }
-//
-//        public void setCars(List<Car> cars) {
-//                this.cars = cars;
-//        }
 }

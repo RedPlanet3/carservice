@@ -7,45 +7,48 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 /**
- * Класс
+ * Класс авто
  * @author elena
  */
 
 @Entity
 @Table(name = "cars")
 public class Car {
-    /** Поле ID */
+    /** Поле ID авто*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    /** Поле имя*/
+    /** Поле имя авто*/
     @NotBlank
     @Column(name = "name")
     private String name;
 
-    /** Поле ссылка на корпус, к которой относится текущая машина */
+    /** Поле ссылка на корпус, который используется в текущей машине */
     @NotNull
     @Valid
     @ManyToOne
     @JoinColumn(name = "body_id")
     private Body body;
 
-    /** Поле ссылка на тип колеса, к которой относится текущая машина */
+    /** Поле ссылка на тип колеса, который используется в текущей машине */
     @NotNull
     @Valid
     @ManyToOne
     @JoinColumn(name = "weel_id")
     private Weel weel;
 
+    /** Количество колес в авто */
     @Min(2)
     @Column(name = "num_of_weel")
     private int numOfWeel;
 
+    /** Конструктор авто */
     public Car() {
     }
 
+    /** Конструктор авто */
     public Car(String name, Body body, Weel weel, int numOfWeel) {
         this.name = name;
         this.body = body;

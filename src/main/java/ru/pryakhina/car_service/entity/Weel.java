@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
- *
+ * Класс колесо
  * @author elena
  */
 
@@ -13,54 +13,24 @@ import java.util.List;
 @Table(name = "weels")
 public class Weel {
 
-    /** Поле ID роли */
+    /** Поле ID колеса */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    /** Поле имя роли */
+    /** Поле имя колеса */
     @NotBlank
     @Column(name = "name")
     private String name;
 
-    /** Поле ссылка на продукты,
-     * относящиеся к текущей роли */
+    /** Поле ссылка на авто, которые используют этот тип колеса */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "weel")
     private List<Car> cars;
 
 
-//    /**
-//     * Функция получения значения поля {@link List< Body >#bodies}
-//     * @return List<Body>
-//     */
-//    public List<Body> getItems() {
-//        return bodies;
-//    }
-//
-//    /**
-//     * Процедура добавления продукта в список продуктов
-//     * текущей роли {@link List< Body >#bodies}
-//     * @param body
-//     */
-//    public void addItemToRole(Body body){
-//        if (this.bodies == null)
-//            this.bodies = new ArrayList<>();
-//        this.bodies.add(body);
-//        body.setRole(this);
-//    }
-
-//    /**
-//     * Процедура установления списка продуктов для
-//     * текущей роли {@link List< Body >#bodies}
-//     * @param bodies
-//     */
-//    public void setItems(List<Body> bodies) {
-//        this.bodies = bodies;
-//    }
-
     /**
-     * Конструктор - создание нового объекта с определенными значениями
+     * Конструктор - создание нового колеса с определенными значениями
      * @param name - имя роли
      */
     public Weel(String name) {
@@ -68,39 +38,23 @@ public class Weel {
     }
 
     /**
-     * Конструктор - создание нового объекта роли
+     * Конструктор - создание нового колеса
      */
     public Weel() {
     }
 
-    /**
-     * Функция получения значения поля id {@link Weel#id}
-     * @return возвращает id продукта
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Процедура заполнения поля id {@link Weel#id}
-     * @param id
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Функция получения значения поля name {@link Weel#name}
-     * @return String
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * Процедура заполнения поля name {@link Weel#name}
-     * @param name
-     */
     public void setName(String name) {
         this.name = name;
     }

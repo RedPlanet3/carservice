@@ -32,12 +32,6 @@ public class RESTController {
     @Autowired
     private CarRepository carRepository;
 
-//    /**  */
-//    @GetMapping("/")
-//    public String showStartPage(){
-//        return "redirect:/cars";
-//
-//    }
     /** возвращает информацию обо всех существующих корпусах*/
     @GetMapping("/bodies")
     public List<Body> getAllCarBody(){
@@ -56,7 +50,7 @@ public class RESTController {
         carServService.deleteBody(carServService.getBody(id));
     }
 
-    /** Удаление корпуса*/
+    /** Удаление колеса*/
     @DeleteMapping("/weels/{id}")
     public void deleteCarWeel(@PathVariable int id){
         carServService.deleteWeel(carServService.getWeel(id));
@@ -72,11 +66,6 @@ public class RESTController {
     }
 
 
-//    @PostMapping
-//    public ResponseEntity<String> valid(@Valid @RequestBody Car car) {
-//        return ResponseEntity.ok("valid");
-//    }
-
     /** возвращает полную информацию о существующем автомобиле
      * @param id*/
     @GetMapping("/cars/{id}")
@@ -84,7 +73,7 @@ public class RESTController {
         return carServService.getCar(id);
     }
 
-    /** возвращает информацию обо всех существующих автомобилях*/
+    /** возвращает информацию обо всех существующих автомобилях с пагинацией*/
     @GetMapping("/cars")
     public Page<Car> getCars(
             @RequestParam(value = "offset", defaultValue = "0") @Min(0) Integer offset,
@@ -92,7 +81,4 @@ public class RESTController {
     ){
         return carRepository.findAll(PageRequest.of(offset, limit));
     }
-
-
-
 }
